@@ -24,6 +24,8 @@ A native Windows **system metrics agent** written in C++ that runs as a **Window
 - OpenTelemetry OTLP/HTTP (JSON payload to `/v1/metrics`)
 
 ## Build (Linux → Windows)
+
+This repo includes a toolchain file at `cmake/toolchains/mingw-w64-x86_64.cmake` (no distro-specific paths).
 ```bash
 sudo apt-get update
 sudo apt-get install -y cmake mingw-w64 ninja-build

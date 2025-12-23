@@ -19,7 +19,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B build -G Ninja \
-            -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw-w64/toolchain-x86_64.cmake \
+            -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/mingw-w64-x86_64.cmake \
             -DCMAKE_BUILD_TYPE=Release
 
       - name: Build

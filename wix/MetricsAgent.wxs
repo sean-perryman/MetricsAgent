@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="MetricsAgent" Language="1033" Version="1.0.0" Manufacturer="YourOrg" UpgradeCode="PUT-GUID-HERE">
+    <Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" />
+
+    <MediaTemplate />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLDIR" Name="MetricsAgent">
+          <Component Id="AgentComponent" Guid="PUT-GUID-HERE">
+            <File Id="AgentExe" Source="..\build\MetricsAgent.exe" KeyPath="yes" />
+            <File Id="AgentCfg" Source="..\config\metrics-agent.json" />
+            <ServiceInstall Id="SvcInstall"
+                            Name="MetricsAgent"
+                            DisplayName="Metrics Agent"
+                            Description="Native Windows metrics agent"
+                            Start="auto"
+                            Type="ownProcess"
+                            Account="LocalService"
+                            ErrorControl="normal" />
+            <ServiceControl Id="SvcControl"
+                            Name="MetricsAgent"
+                            Start="install"
+                            Stop="both"
+                            Remove="uninstall"
+                            Wait="yes" />
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="MainFeature" Title="MetricsAgent" Level="1">
+      <ComponentRef Id="AgentComponent"/>
+    </Feature>
+  </Product>
+</Wix>
